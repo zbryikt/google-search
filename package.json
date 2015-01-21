@@ -1,0 +1,23 @@
+{
+  "author": "Kirby Wu",
+  "name": "google-search",
+  "description": "Fetch google search result (links) for a given keyword",
+  "version": "0.0.1",
+  "homepage": "https://github.com/zbryikt/google-search",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zbryikt/google-search"
+  },
+  "engines": {
+    "node": ">=0.8.18",
+    "npm": ">=1.2.2"
+  },
+  "dependencies": {
+    "bluebird": "=2.8.0",
+    "request": "=2.51.0",
+    "cheerio": "=0.18.0",
+  },
+  "devDependencies": {
+    "LiveScript": ">=1.2.0"
+  }
+}
