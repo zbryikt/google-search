@@ -5,7 +5,7 @@ search = do
     result = []
     (res, rej) <- new bluebird _
     (e,r,b) <- request {
-      url: "https://www.google.com.tw/search?q=#{encodeURIComponent(keyword)}}&start=#{(page - 1)* 10}"
+      url: "https://www.google.com.tw/search?q=#{encodeURIComponent(keyword)}&start=#{(page - 1)* 10}"
       method: \GET
     }, _
     if e or !b => return rej!
