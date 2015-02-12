@@ -8,8 +8,13 @@ Usage
 -------------------
 
     search = require("google-search");
-    trends.get("obama",1); // return a list of links
-    trends.getPages("obama",[1,2,3]); // return a longer list of links
+
+    search.get("obama").then(function(result) {...});
+    # result will be like this: 
+    # [{href: "...", title: "...", content: "..."}, {...}, ...]
+
+    # get multiple pages in one invocation
+    search.getPages("obama, [1,2,3]).then(function(result) {...});
 
 
 License
