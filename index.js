@@ -61,9 +61,33 @@ search = {
   },
   getPages: function(keyword, pages){
     var this$ = this;
+    pages == null && (pages = [1]);
+    if (typeof keyword === "object" && keyword.length) {
+      return this.getAll(keyword, pages);
+    } else {
+      return new bluebird(function(res, rej){
+        return this$._getPages(keyword, pages, [], res, rej);
+      });
+    }
+  },
+  _getAll: function(keywords, pages, result, res, rej){
+    var keyword, this$ = this;
     pages == null && (pages = []);
+    result == null && (result = {});
+    if (!keywords.length) {
+      return res(result);
+    }
+    keyword = keywords.splice(0, 1)[0];
+    return this.getPages(keyword, pages.slice(0)).then(function(list){
+      result[keyword] = list;
+      return this$._getAll(keywords, pages, result, res, rej);
+    });
+  },
+  getAll: function(keywords, pages){
+    var this$ = this;
+    pages == null && (pages = [1]);
     return new bluebird(function(res, rej){
-      return this$._getPages(keyword, pages, [], res, rej);
+      return this$._getAll(keywords, pages, {}, res, rej);
     });
   }
 };

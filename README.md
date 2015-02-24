@@ -14,7 +14,8 @@ Usage
     # [{href: "...", title: "...", content: "..."}, {...}, ...]
 
     # get multiple pages in one invocation
-    search.getPages("obama, [1,2,3]).then(function(result) {...});
+    search.getPages("obama", [1,2,3]).then(function(result) {...});
+    search.getPages(["obama","putin"], [1,2,3]).then(function(result) {...});
 
 
 License

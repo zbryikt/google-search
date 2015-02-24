@@ -31,7 +31,20 @@ search = do
       result ++= list
       @_getPages keyword, pages, result, res, rej
     .catch rej
-  getPages: (keyword, pages=[]) -> new bluebird (res, rej) ~>
-    @_getPages keyword, pages, [], res, rej
+  getPages: (keyword, pages=[1]) -> 
+    if typeof(keyword) == "object" and keyword.length => @getAll keyword, pages
+    else new bluebird (res, rej) ~>
+      @_getPages keyword, pages, [], res, rej
+
+  _getAll: (keywords, pages=[], result={}, res, rej) ->
+    if !keywords.length => 
+      return res result
+    keyword = keywords.splice(0,1).0
+    @getPages keyword, pages.slice(0) .then (list)~>
+      result[keyword] = list
+      @_getAll keywords, pages, result, res, rej
+
+  getAll: (keywords, pages=[1]) -> new bluebird (res, rej) ~>
+    @_getAll keywords, pages, {}, res, rej
 
 module.exports = search
